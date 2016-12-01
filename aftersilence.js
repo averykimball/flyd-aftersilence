@@ -1,14 +1,16 @@
 var flyd = require('flyd');
 
-module.exports = function(dur, s) {
+module.exports = function(duration, sourceStream) {
   var scheduled;
   var buffer = [];
-  return flyd.stream([s], function(self) {
-    buffer.push(s());
+  var bufferStream = flyd.stream();
+  flyd.on(function(sourceValue) {
+    buffer.push(sourceValue);
     clearTimeout(scheduled);
     scheduled = setTimeout(function() {
-      self(buffer);
+      bufferStream(buffer);
       buffer = [];
-    }, dur);
-  });
+    }, duration);
+  },sourceStream);
+  return bufferStream;
 };
