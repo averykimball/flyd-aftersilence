@@ -29,5 +29,8 @@
   "homepage": "https://github.com/paldepind/flyd-aftersilence",
   "dependencies": {
     "flyd": "0.1.x"
+  },
+  "devDependencies": {
+    "mocha": "3.2.0"
   }
 }
